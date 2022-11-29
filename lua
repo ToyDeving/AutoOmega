@@ -25,14 +25,15 @@ function DoScript()
 	task.spawn(function()
 		while true and Activated do
 			local CurrentStamina = game.Players.LocalPlayer.Character:WaitForChild("CurrentStamina")
+			local MaxStamina = game.Players.LocalPlayer.Character:WaitForChild("MaxStamina")
 			game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
 			if DoPushup == false then
 				DoPushup = true
 				DoSquat = false
 				game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:WaitForChild("Push up"))
-				repeat task.wait() until CurrentStamina.Value >= 100 or Activated == false
+				repeat task.wait() until CurrentStamina.Value >= MaxStamina.Value or Activated == false
 				repeat 
-					game.Players.Ruyzus.Character["Push up"]:Activate()
+					game.Players.LocalPlayer.Character["Push up"]:Activate()
 					repeat for i, v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do if v.Animation.AnimationId == PushupID then CurrentTrack = v end end task.wait() until CurrentTrack ~= nil
 					CurrentTrack.Stopped:Wait()
 					CurrentTrack = nil
@@ -41,9 +42,9 @@ function DoScript()
 				DoSquat = true
 				DoPushup = false
 				game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:WaitForChild("Squat"))
-				repeat task.wait() until CurrentStamina.Value >= 100 or Activated == false
+				repeat task.wait() until CurrentStamina.Value >= MaxStamina.Value or Activated == false
 				repeat 
-					game.Players.Ruyzus.Character["Squat"]:Activate()
+					game.Players.LocalPlayer.Character["Squat"]:Activate()
 					repeat for i, v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do if v.Animation.AnimationId == SquatID then CurrentTrack = v end end task.wait() until CurrentTrack ~= nil
 					CurrentTrack.Stopped:Wait()
 					CurrentTrack = nil
